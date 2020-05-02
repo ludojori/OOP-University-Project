@@ -23,9 +23,9 @@ protected:
 	void setGenre(const char* genre);
 
 private:
-	char* _title;
-	char* _author;
-	char* _genre;
+	char* _title = nullptr;
+	char* _author = nullptr;
+	char* _genre = nullptr;
 };
 
 #endif // BOOK_H

@@ -5,7 +5,7 @@
 class Device :public Product
 {
 public:
-	//Device();
+	Device();
 	Device(const char* brand, const char* model, const char* manufactorer, const char* description, const double price, const double weight);
 	Device(const Device& other);
 	Device& operator=(const Device& other);
@@ -24,9 +24,9 @@ protected:
 	void setManufacturer(const char* manufactorer);
 
 private:
-	char* _brand;
-	char* _model;
-	char* _manufacturer;
+	char* _brand = nullptr;
+	char* _model = nullptr;
+	char* _manufacturer = nullptr;
 
 };
 

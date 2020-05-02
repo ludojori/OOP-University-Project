@@ -1,22 +1,16 @@
 #include "Cart.h"
 
-Cart::Cart()
+Cart::Cart() :_total(0.0f), _size(0), _cap(1)
 {
-	_total = 0;
-	_size = 0;
-	_cap = 1;
-	_products = new Product*[_cap];
+	_products = new Product * [_cap] { nullptr };
 }
 
-Cart::Cart(const Cart& other)
+Cart::Cart(const Cart& other) : _total(other._total), _size(other._size), _cap(other._cap)
 {
-	_total = other.getTotal();
-	_size = other.getSize();
-	_cap = other.getCap();
-	_products = new Product*[_cap];
+	_products = new Product * [_cap] { nullptr };
 	for (unsigned int i = 0; i < _size; ++i)
 	{
-		_products[i] = other._products[i];
+		addProduct(other._products[i]);
 	}
 }
 
@@ -24,9 +18,9 @@ Cart& Cart::operator=(const Cart& other)
 {
 	if (this != &other)
 	{
-		_total = other.getTotal();
-		_size = other.getSize();
-		_cap = other.getCap();
+		_total = other._total;
+		_size = other._size;
+		_cap = other._cap;
 		clear();
 		_products = new Product*[_cap];
 		for (unsigned int i = 0; i < _size; ++i)
@@ -48,13 +42,9 @@ Cart& Cart::operator+(Product* product)
 	return *this;
 }
 
-void Cart::addProduct(Product* product)
+// changes required...
+Cart& Cart::addProduct(Product* product)
 {
-	if (product == nullptr)
-	{
-		std::cout << "Error: Failed to add product to cart - product was nullptr.\n";
-		return;
-	}
 	if (_size == _cap)
 	{
 		resize();
@@ -76,6 +66,7 @@ void Cart::addProduct(Product* product)
 		_products[_size - 1] = dynamic_cast<Book*>(product);
 	}
 	incrementSize();
+	return *this;
 }
 
 void Cart::printProducts() const

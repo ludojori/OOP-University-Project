@@ -3,6 +3,7 @@
 #include "Device.h"
 #include "Book.h"
 #include "Accessory.h"
+#include "Food.h"
 
 class Store
 {

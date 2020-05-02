@@ -2,14 +2,14 @@
 #include <iostream>
 #include <cstring>
 
-/*
+
 Device::Device() :Product()
 {
 	setBrand("Default_Brand");
 	setModel("Default_Model");
 	setManufacturer("Default_Manufacturer");
 }
-*/
+
 
 Device::Device(const char* brand, const char* model, const char* manufactorer, const char* description, const double price, const double weight) :Product(description, price, weight)
 {
@@ -75,8 +75,9 @@ Product::Category Device::getCategory() const
 
 void Device::printInfo() const
 {
+	Product::printInfo();
 	std::cout
-		<< "--> Device Info\n"
+		<< "Type: Device\n"
 		<< "Brand: " << _brand << "\n"
 		<< "Model: " << _model << "\n"
 		<< "Manufacturer: " << _manufacturer << "\n";

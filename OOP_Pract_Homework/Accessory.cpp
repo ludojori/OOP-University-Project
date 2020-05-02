@@ -2,12 +2,12 @@
 #include <iostream>
 #include <cstring>
 
-Accessory::Accessory()
+Accessory::Accessory() :Product()
 {
 	setName("Default_Name");
 }
 
-Accessory::Accessory(const Accessory& other)
+Accessory::Accessory(const Accessory& other) : Product(other)
 {
 	setName(other.getName());
 }
@@ -16,6 +16,7 @@ Accessory& Accessory::operator=(const Accessory& other)
 {
 	if (this != &other)
 	{
+		Product::operator=(other);
 		setName(other.getName());
 	}
 	return *this;
@@ -36,8 +37,9 @@ char* Accessory::getName() const
 
 void Accessory::printInfo() const
 {
+	Product::printInfo();
 	std::cout
-		<< "--> Accessory Info\n"
+		<< "Type: Accessory\n"
 		<< "Name: " << _name << "\n";
 }
 

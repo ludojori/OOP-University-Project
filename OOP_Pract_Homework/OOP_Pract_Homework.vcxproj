@@ -38,7 +38,6 @@
     <ClInclude Include="Food.h" />
     <ClInclude Include="Product.h" />
     <ClInclude Include="Store.h" />
-    <ClInclude Include="Test.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

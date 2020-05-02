@@ -67,8 +67,9 @@ char* Book::getGenre() const
 
 void Book::printInfo() const
 {
+	Product::printInfo();
 	std::cout
-		<< "--> Book Info\n"
+		<< "Type: Book\n"
 		<< "Title: " << _title << "\n"
 		<< "Author: " << _author << "\n"
 		<< "Genre: " << _genre << "\n";

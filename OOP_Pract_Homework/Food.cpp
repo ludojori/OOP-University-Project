@@ -2,33 +2,25 @@
 #include <iostream>
 #include <cstring>
 
-Food::Food()
+Food::Food() :Product(), _calories(0.0f), _fats(0.0f), _proteins(0.0f), _carbohydrates(0.0f)
 {
 	setName("Default_Name");
-	setCalories(0.0f);
-	setFats(0.0f);
-	setProteins(0.0f);
-	setCarbohydrates(0.0f);
 }
 
-Food::Food(const Food& other)
+Food::Food(const Food& other) : Product(other), _calories(other._calories), _fats(other._fats), _proteins(other._proteins), _carbohydrates(other._carbohydrates)
 {
 	setName(other.getName());
-	setCalories(other.getCalories());
-	setFats(other.getFats());
-	setProteins(other.getProteins());
-	setCarbohydrates(other.getCarbohydrates());
 }
 
 Food& Food::operator=(const Food& other)
 {
 	if (this != &other)
 	{
+		_calories = other._calories;
+		_fats = other._fats;
+		_proteins = other._proteins;
+		_carbohydrates = other._carbohydrates;
 		setName(other.getName());
-		setCalories(other.getCalories());
-		setFats(other.getFats());
-		setProteins(other.getProteins());
-		setCarbohydrates(other.getCarbohydrates());
 	}
 	return *this;
 }
@@ -68,8 +60,9 @@ double Food::getCarbohydrates() const
 
 void Food::printInfo() const
 {
+	Product::printInfo();
 	std::cout
-		<< "--> Food Info:\n"
+		<< "Type: Food\n"
 		<< "Name: " << _name << "\n"
 		<< "Calories: " << _calories << "%\n"
 		<< "Fats: " << _fats << "%\n"
@@ -85,24 +78,4 @@ void Food::setName(const char* name)
 	}
 	_name = new char[strlen(name) + 1];
 	strcpy_s(_name, strlen(name) + 1, name);
-}
-
-void Food::setCalories(const double calories)
-{
-	_calories = calories;
-}
-
-void Food::setFats(const double fats)
-{
-	_fats = fats;
-}
-
-void Food::setProteins(const double proteins)
-{
-	_proteins = proteins;
-}
-
-void Food::setCarbohydrates(const double carbohydrates)
-{
-	_carbohydrates = carbohydrates;
 }

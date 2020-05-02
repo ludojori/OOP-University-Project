@@ -18,7 +18,7 @@ protected:
 	void setName(const char* name);
 
 private:
-	char* _name;
+	char* _name = nullptr;
 
 };
 

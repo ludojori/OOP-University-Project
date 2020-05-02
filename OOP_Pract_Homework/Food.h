@@ -1,10 +1,8 @@
 #ifndef FOOD_H
 #define FOOD_H
+#include "Product.h"
 
-/*
-To Inherit Class Product
-*/
-class Food
+class Food :public Product
 {
 public:
 	Food();
@@ -22,14 +20,9 @@ public:
 
 protected:
 	void setName(const char* name);
-	void setCalories(const double calories);
-	void setFats(const double fats);
-	void setProteins(const double proteins);
-	void setCarbohydrates(const double carbohydrates);
 
 private:
-	char* _name;
-	// type - to be enum
+	char* _name = nullptr;
 	double _calories;
 	double _fats;
 	double _proteins;

@@ -3,9 +3,6 @@
 #include <iostream>
 #include <cstring>
 
-/*
-To Be Abstract Base Class
-*/
 class Product
 {
 public:
@@ -13,29 +10,27 @@ public:
 	Product(const char* description, const double price, const double weight);
 	Product(const Product& other);
 	Product& operator=(const Product& other);
-	//Product* operator=(Product* other);
 	virtual ~Product();
 
-	char* getDescription() const;
-	double getPrice() const;
-	double getWeight() const;
+	virtual char* getDescription() const;
+	virtual double getPrice() const;
+	virtual double getWeight() const;
 
-	void printInfo() const;
+	virtual void printInfo() const;
 
 	enum class Category
 	{
 		UNDEFINED, DEVICE, BOOK, ACCESSORY
 	};
-
+	
+	/*Make pure virtual if class Product must be abstract*/
 	virtual Category getCategory() const;
 
 protected:
 	void setDescription(const char* description);
-	void setPrice(const double price);
-	void setWeight(const double weight);
 
 private:
-	char* _description;
+	char* _description = nullptr;
 	double _price;
 	double _weight;
 

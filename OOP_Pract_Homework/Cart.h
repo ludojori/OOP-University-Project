@@ -3,6 +3,7 @@
 #include "Device.h"
 #include "Book.h"
 #include "Accessory.h"
+#include "Food.h"
 
 class Cart
 {
@@ -14,7 +15,7 @@ public:
 
 	Cart& operator+(Product* product);
 
-	void addProduct(Product* product);
+	Cart& addProduct(Product* product);
 	void printProducts() const;
 	void clear();
 
@@ -22,7 +23,7 @@ public:
 	bool isEmpty() const;
 
 private:
-	Product** _products;
+	Product** _products = nullptr;
 	unsigned int _size;
 	unsigned int _cap;
 	double _total;

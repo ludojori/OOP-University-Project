@@ -2,27 +2,19 @@
 #include <iostream>
 #include <cstring>
 
-
-
-Product::Product()
+Product::Product() :_price{ 0.0f }, _weight{ 0.0f }
 {
 	setDescription("Default_Description");
-	setPrice(0.0f);
-	setWeight(0.0f);
 }
 
-Product::Product(const char* description, const double price, const double weight)
+Product::Product(const char* description, const double price, const double weight) : _price{ price }, _weight{ weight }
 {
 	setDescription(description);
-	setPrice(price);
-	setWeight(weight);
 }
 
-Product::Product(const Product& other)
+Product::Product(const Product& other) : _price{ other._price }, _weight{ other._weight }
 {
 	setDescription(other.getDescription());
-	setPrice(other.getPrice());
-	setWeight(other.getWeight());
 }
 
 Product& Product::operator=(const Product& other)
@@ -30,8 +22,8 @@ Product& Product::operator=(const Product& other)
 	if (this != &other)
 	{
 		setDescription(other.getDescription());
-		setPrice(other.getPrice());
-		setWeight(other.getWeight());
+		_price = other._price;
+		_weight = other._weight;
 	}
 	return *this;
 }
@@ -82,14 +74,4 @@ void Product::setDescription(const char* description)
 	}
 	_description = new char[strlen(description) + 1];
 	strcpy_s(_description, strlen(description) + 1, description);
-}
-
-void Product::setPrice(const double price)
-{
-	_price = price;
-}
-
-void Product::setWeight(const double weight)
-{
-	_weight = weight;
 }
