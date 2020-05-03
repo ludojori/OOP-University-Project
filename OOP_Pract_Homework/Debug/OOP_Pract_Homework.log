@@ -1,2 +1,11 @@
-﻿  MainApplication.cpp
+﻿  Accessory.cpp
+  Book.cpp
+  Cart.cpp
+  Client.cpp
+  Device.cpp
+  Food.cpp
+  MainApplication.cpp
+  Product.cpp
+  Store.cpp
+  Generating Code...
   OOP_Pract_Homework.vcxproj -> D:\Important Stuff\FMI\II Курс\ИД - ООП Практикум\OOP_Pract_Homework\Debug\OOP_Pract_Homework.exe
