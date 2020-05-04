@@ -10,6 +10,7 @@ public:
 	TemplateArray(const TemplateArray& other);
 	TemplateArray<T>& operator=(const TemplateArray& other);
 	T& operator[](unsigned int index) const;
+
 	~TemplateArray();
 
 	TemplateArray<T>& add(T element);
@@ -50,7 +51,14 @@ inline TemplateArray<T>& TemplateArray<T>::operator=(const TemplateArray& other)
 {
 	if (this != &other)
 	{
-
+		_size = other._size;
+		_cap = other._cap;
+		delete[] elements;
+		elements = new T[_cap];
+		for (unsigned int i = 0; i < _size; ++i)
+		{
+			elements[i] = other.elements[i];
+		}
 	}
 	return *this;
 }
@@ -70,7 +78,10 @@ inline TemplateArray<T>::~TemplateArray()
 template<class T>
 inline TemplateArray<T>& TemplateArray<T>::add(T element)
 {
-	
+	if (_size == _cap)
+		resize();
+	elements[_size] = element;
+	++_size;
 	return *this;
 }
 
@@ -80,6 +91,8 @@ inline TemplateArray<T>& TemplateArray<T>::clear()
 	if (elements != nullptr)
 	{
 		delete[] elements;
+		elements = nullptr;
+		_size = _cap = 0;
 	}
 	return *this;
 }
@@ -105,4 +118,12 @@ inline bool TemplateArray<T>::isEmpty() const
 template<class T>
 inline void TemplateArray<T>::resize()
 {
+	_cap *= 2;
+	T* temp = new T[_cap];
+	for (unsigned int i = 0; i < _size; ++i)
+	{
+		temp[i] = elements[i];
+	}
+	delete[] elements;
+	elements = temp;
 }
