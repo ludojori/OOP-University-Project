@@ -54,7 +54,8 @@ double Product::getWeight() const
 void Product::printInfo() const
 {
 	std::cout
-		<< "--> Product Info\n"
+		<< "Product Info\n"
+		<< "---------------\n"
 		<< "Description:\n\n"
 		<< _description << "\n\n"
 		<< "Price: " << _price << "\n"
