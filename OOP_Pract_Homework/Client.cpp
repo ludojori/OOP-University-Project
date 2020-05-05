@@ -2,21 +2,19 @@
 #include <iostream>
 #include <cstring>
 
-Client::Client(const char* name, const char* password, const double balance)
+Client::Client(const char* name, const char* password, const double balance) :_balance(balance)
 {
 	setName(name);
 	setPassword(password);
 	encryptPassword();
-	setBalance(balance);
-	setCart(Cart());
+
 }
 
-Client::Client(const Client& other)
+Client::Client(const Client& other) :_balance(other._balance)
 {
 	setName(other.getName());
 	setPassword(other._password);
-	setBalance(other.getBalance());
-	setCart(other.getCart());
+
 }
 
 Client& Client::operator=(const Client& other)
@@ -25,8 +23,7 @@ Client& Client::operator=(const Client& other)
 	{
 		setName(other.getName());
 		setPassword(other._password);
-		setBalance(other.getBalance());
-		setCart(other.getCart());
+		_balance = other._balance;
 	}
 	return *this;
 }
@@ -36,10 +33,12 @@ Client::~Client()
 	if (_name != nullptr)
 	{
 		delete[] _name;
+		_name = nullptr;
 	}
 	if (_password != nullptr)
 	{
 		delete[] _password;
+		_password = nullptr;
 	}
 }
 
@@ -48,17 +47,7 @@ char* Client::getName() const
 	return _name;
 }
 
-double Client::getBalance() const
-{
-	return _balance;
-}
-
-const Cart& Client::getCart() const
-{
-	return _cart;
-}
-
-void Client::changePassword(const char* verification, const char* newPassword)
+Client& Client::changePassword(const char* verification, const char* newPassword)
 {
 	decryptPassword();
 	if (strcmp(_password, verification) != 0)
@@ -68,8 +57,10 @@ void Client::changePassword(const char* verification, const char* newPassword)
 	else
 	{
 		setPassword(newPassword);
+		std::cout << "Notice: Password successfully changed.\n";
 	}
 	encryptPassword();
+	return *this;
 }
 
 void Client::printClientInfo() const
@@ -80,36 +71,28 @@ void Client::printClientInfo() const
 		<< "Balance: " << _balance << "\n";
 }
 
-void Client::printCartProducts() const
+void Client::printCart() const
 {
-	if (_cart.isEmpty())
-	{
-		std::cout << _name << "'s cart is empty.\n";
-		return;
-	}
-	std::cout << _name << "'s products in cart:\n";
-	_cart.printProducts();
+	_cart.print();
 }
 
-void Client::addToCart(Product* product)
+Client& Client::addToCart(Product* product)
 {
-	_cart.addProduct(product);
+	_cart.add(product);
+	return *this;
 }
 
-void Client::payProducts()
+Client& Client::payProducts()
 {
-	if (_cart.isEmpty())
-	{
-		std::cout << "ERROR: Payment cancelled - \"" << _name << "\"'s cart is empty.\n";
-		return;
-	}
 	if (_balance < _cart.getTotal())
 	{
-		std::cout << "ERROR: Payment cancelled - Total price exceeds \"" << _name << "\"'s balance.\n";
-		return;
+		std::cout << "Error: Unable to pay products - total sum exceeding balance.\n";
+		return *this;
 	}
 	_balance -= _cart.getTotal();
+	std::cout << "Successfully purchased all products for: " << _cart.getTotal() << "\n";
 	_cart.clear();
+	return *this;
 }
 
 void Client::setName(const char* name)
@@ -130,16 +113,6 @@ void Client::setPassword(const char* password)
 	}
 	_password = new char[strlen(password) + 1];
 	strcpy_s(_password, strlen(password) + 1, password);
-}
-
-void Client::setBalance(const double balance)
-{
-	_balance = balance;
-}
-
-void Client::setCart(const Cart& cart)
-{
-	_cart = cart;
 }
 
 void Client::encryptPassword()

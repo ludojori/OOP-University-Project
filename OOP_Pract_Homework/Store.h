@@ -1,34 +1,23 @@
 #ifndef STORE_H
 #define STORE_H
-#include "Device.h"
-#include "Book.h"
-#include "Accessory.h"
-#include "Food.h"
+#include "Client.h"
 
 class Store
 {
 public:
 	Store();
-	Store(const Store& other);
-	Store& operator=(const Store& other);
-	~Store();
+	Store(const Store& other) = delete;
+	Store& operator=(const Store& other) = delete;
 
-	void addProduct(Product* product);
-	void clear();
+	Store& addProduct(Product* product);
+	Store& clear();
+	void print() const;
 	void printByCategory(const Product::Category category) const;
 
 	bool isEmpty() const;
 
 private:
-	Product** _products;
-	unsigned int _size;
-	unsigned int _cap;
-
-	unsigned int getSize() const;
-	unsigned int getCap() const;
-
-	void resize();
-	void incrementSize();
+	TemplateArray<Product*> _products;
 };
 
 #endif // STORE_H
