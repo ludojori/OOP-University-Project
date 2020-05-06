@@ -18,6 +18,8 @@ public:
 
 	void printInfo() const;
 
+	virtual Category getCategory() const override;
+
 protected:
 	void setName(const char* name);
 

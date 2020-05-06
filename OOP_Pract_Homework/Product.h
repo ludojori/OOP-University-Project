@@ -20,10 +20,10 @@ public:
 
 	enum class Category
 	{
-		UNDEFINED, DEVICE, BOOK, ACCESSORY
+		UNDEFINED, DEVICE, BOOK, FOOD, ACCESSORY
 	};
 	
-	/*Make pure virtual if class Product must be abstract*/
+	/* Make pure virtual if class Product must be abstract. */
 	virtual Category getCategory() const;
 
 protected:

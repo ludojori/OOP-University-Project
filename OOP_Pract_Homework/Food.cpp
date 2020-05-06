@@ -70,6 +70,11 @@ void Food::printInfo() const
 		<< "Carbohydrates: " << _carbohydrates << "%\n";
 }
 
+Product::Category Food::getCategory() const
+{
+	return Product::Category::FOOD;
+}
+
 void Food::setName(const char* name)
 {
 	if (_name != nullptr)
